@@ -192,9 +192,23 @@ public class ProductionManager {
         }
 
         // --- Semua validasi lolos: Simpan work order ---
-        WorkOrder workOrder = new WorkOrder(workOrderId, productName, quantity, machine, operator);
+        WorkOrder workOrder = new WorkOrder(
+            workOrderId,
+            productName,
+            quantity,
+            machine,
+            operator
+        );
+
         workOrderList.add(workOrder);
-        System.out.println("  [OK] Work Order [" + workOrderId + "] berhasil dibuat dengan status PENDING.");
+
+        // Mesin langsung dianggap sudah dibooking
+        machine.setAvailable(false);
+
+        System.out.println(
+            "  [OK] Work Order [" + workOrderId +
+            "] berhasil dibuat dengan status PENDING."
+        );
     }
 
     /**

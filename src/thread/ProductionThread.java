@@ -54,8 +54,6 @@ public class ProductionThread extends Thread {
         // ============================================================
         synchronized (machine) {
             try {
-                // --- Tandai mesin sedang digunakan ---
-                machine.setAvailable(false);
 
                 // --- Ubah status WO menjadi RUNNING ---
                 workOrder.setStatus(WorkOrder.Status.RUNNING);
