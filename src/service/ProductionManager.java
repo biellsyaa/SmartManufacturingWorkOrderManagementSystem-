@@ -273,9 +273,23 @@ public class ProductionManager {
                 System.out.println("  [!] Main thread diinterupsi: " + e.getMessage());
             }
         }
+        
 
         System.out.println("\n  ============================================================");
         System.out.println("  === SELURUH PRODUKSI TELAH SELESAI ===");
         System.out.println("  ============================================================\n");
     }
+    public model.WorkOrder findWorkOrderById(String workOrderId) {
+
+    for (model.WorkOrder wo : workOrderList) {
+
+        if (wo.getWorkOrderId()
+                .equalsIgnoreCase(workOrderId)) {
+
+            return wo;
+        }
+    }
+
+    return null;
+}
 }

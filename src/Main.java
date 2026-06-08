@@ -3,7 +3,9 @@ import exception.InvalidQuantityException;
 import exception.MachineUnavailableException;
 import model.Machine;
 import model.Operator;
+import model.WorkOrder;
 import service.ProductionManager;
+import model.WorkOrder;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -48,6 +50,7 @@ public class Main {
                 case 2:  menuOperator();    break;
                 case 3:  menuWorkOrder();   break;
                 case 4:  menuProduction();  break;
+                case 5:  searchWorkOrder(); break;
                 case 0:
                     System.out.println("\n  Terima kasih. Sistem ditutup.\n");
                     running = false;
@@ -316,14 +319,74 @@ public class Main {
      * Menampilkan menu utama aplikasi.
      */
     private static void printMainMenu() {
-        System.out.println("  ┌─────────────────────────────────┐");
-        System.out.println("  │          MENU UTAMA             │");
-        System.out.println("  ├─────────────────────────────────┤");
-        System.out.println("  │  1. Manajemen Mesin             │");
-        System.out.println("  │  2. Manajemen Operator          │");
-        System.out.println("  │  3. Manajemen Work Order        │");
-        System.out.println("  │  4. Produksi                    │");
-        System.out.println("  │  0. Keluar                      │");
-        System.out.println("  └─────────────────────────────────┘");
+    System.out.println("  ┌─────────────────────────────────┐");
+    System.out.println("  │          MENU UTAMA             │");
+    System.out.println("  ├─────────────────────────────────┤");
+    System.out.println("  │  1. Manajemen Mesin             │");
+    System.out.println("  │  2. Manajemen Operator          │");
+    System.out.println("  │  3. Manajemen Work Order        │");
+    System.out.println("  │  4. Produksi                    │");
+    System.out.println("  │  5. Cari Work Order             │");
+    System.out.println("  │  0. Keluar                      │");
+    System.out.println("  └─────────────────────────────────┘");
     }
+    private static void searchWorkOrder() {
+
+    System.out.println("\n");
+    System.out.println("  ╔══════════════════════════════════════╗");
+    System.out.println("  ║          CARI WORK ORDER            ║");
+    System.out.println("  ╚══════════════════════════════════════╝");
+
+    System.out.print("  Masukkan WO ID : ");
+
+    String woId = scanner.nextLine().trim();
+
+    WorkOrder wo =
+        manager.findWorkOrderById(woId);
+    if (wo == null) {
+
+        System.out.println(
+                "\n  [!] Work Order tidak ditemukan."
+        );
+
+        return;
+    }
+
+    System.out.println("\n");
+    System.out.println("  ╔══════════════════════════════════════╗");
+    System.out.println("  ║        DETAIL WORK ORDER            ║");
+    System.out.println("  ╚══════════════════════════════════════╝");
+
+    System.out.println(
+            "  WO ID      : "
+                    + wo.getWorkOrderId()
+    );
+
+    System.out.println(
+            "  Produk     : "
+                    + wo.getProductName()
+    );
+
+    System.out.println(
+            "  Quantity   : "
+                    + wo.getQuantity()
+    );
+
+    System.out.println(
+            "  Status     : "
+                    + wo.getStatus()
+    );
+
+    System.out.println(
+            "  Machine    : "
+                    + wo.getMachine().getMachineName()
+    );
+
+    System.out.println(
+            "  Operator   : "
+                    + wo.getOperator().getOperatorName()
+    );
+
+    System.out.println();
+}
 }
